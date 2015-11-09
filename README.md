@@ -1,5 +1,4 @@
-[dddddddd](##cmdline)
-s
+[cmdline][]
 
 s
 
