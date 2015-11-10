@@ -1,4 +1,5 @@
 [/proc/[pid]/cmdline](#cmdline)  
+[/proc/[pid]/comm](#comm)  
 [/proc/[pid]/cwd](#cwd)  
 [/proc/[pid]/environ](#environ)  
 [/proc/[pid]/exe](#exe)  
@@ -12,6 +13,12 @@
 
     # cat /proc/2948/cmdline
     /usr/sbin/libvirtd--listen
+
+## comm
+`/proc/[pid]/comm`包含进程的命令名。举例如下：  
+
+    # cat /proc/2948/comm
+    libvirtd
 
 ##cwd  
 `/proc/[pid]/cwd`是进程当前工作目录的符号链接。举例如下：  
