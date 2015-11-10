@@ -3,6 +3,7 @@
 [/proc/[pid]/cwd](#cwd)  
 [/proc/[pid]/environ](#environ)  
 [/proc/[pid]/exe](#exe)  
+[/proc/[pid]/maps](#maps)  
 [/proc/[pid]/root](#root)  
 
 ## cmdline
@@ -44,6 +45,26 @@
 
     # ls -lt /proc/2948/exe
     lrwxrwxrwx 1 root root 0 Nov  5 13:04 /proc/2948/exe -> /usr/sbin/libvirtd
+
+## maps
+`/proc/[pid]/maps`显示进程的内存区域映射信息。举例如下：  
+
+    # cat /proc/2948/maps
+    ......
+    address                   perms offset  dev   inode                      pathname
+    7f4a2e2ad000-7f4a2e2ae000 rw-p 00006000 08:14 6505977                    /usr/lib64/sasl2/libsasldb.so.3.0.0
+    7f4a2e2ae000-7f4a2e2af000 ---p 00000000 00:00 0
+    7f4a2e2af000-7f4a2eaaf000 rw-p 00000000 00:00 0                          [stack:94671]
+    7f4a2eaaf000-7f4a2eab0000 ---p 00000000 00:00 0
+    7f4a2eab0000-7f4a2f2b0000 rw-p 00000000 00:00 0                          [stack:94670]
+    ......
+    7f4a434d0000-7f4a434d5000 rw-p 0006e000 08:14 4292988                    /usr/sbin/libvirtd
+    7f4a4520a000-7f4a452f7000 rw-p 00000000 00:00 0                          [heap]
+    7ffd1a7e4000-7ffd1a805000 rw-p 00000000 00:00 0                          [stack]
+    7ffd1a820000-7ffd1a821000 r-xp 00000000 00:00 0                          [vdso]
+    ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+其中注意的一点是`[stack:<tid>]`是线程的堆栈信息，对应于`/proc/[pid]/task/[tid]/`路径。  
 
 ## root
 `/proc/[pid]/root`是进程根目录的符号链接。举例如下： 
