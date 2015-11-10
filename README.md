@@ -1,5 +1,6 @@
 [/proc/[pid]/cmdline](#cmdline)  
 [/proc/[pid]/environ](#environ)  
+[/proc/[pid]/exe](#exe)  
 
 
 ## cmdline
@@ -22,3 +23,9 @@
     LIBVIRTD_CONFIG=/etc/libvirt/libvirtd.conf
     LIBVIRTD_ARGS=--listen
     LIBVIRTD_NOFILES_LIMIT=2048
+
+## exe
+`/proc/[pid]/exe`为实际运行程序的符号链接。举例如下：  
+
+    # ls -lt /proc/2948/exe
+    lrwxrwxrwx 1 root root 0 Nov  5 13:04 /proc/2948/exe -> /usr/sbin/libvirtd
