@@ -2,7 +2,7 @@
 [/proc/[pid]/cwd](#cwd)  
 [/proc/[pid]/environ](#environ)  
 [/proc/[pid]/exe](#exe)  
-
+[/proc/[pid]/root](#root)  
 
 ## cmdline
 `/proc/[pid]/cmdline`是一个只读文件，包含进程的完整命令行信息。如果这个进程是`zombie`进程，则这个文件没有任何内容。举例如下：    
@@ -37,3 +37,10 @@
 
     # ls -lt /proc/2948/exe
     lrwxrwxrwx 1 root root 0 Nov  5 13:04 /proc/2948/exe -> /usr/sbin/libvirtd
+
+## root
+`/proc/[pid]/root`是进程根目录的符号链接。举例如下： 
+
+    # ls -lt /proc/2948/root
+    lrwxrwxrwx 1 root root 0 Nov  9 12:14 /proc/2948/root -> /
+
