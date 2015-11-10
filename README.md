@@ -1,4 +1,5 @@
 [/proc/[pid]/cmdline](#cmdline)  
+[/proc/[pid]/cwd](#cwd)  
 [/proc/[pid]/environ](#environ)  
 [/proc/[pid]/exe](#exe)  
 
@@ -11,6 +12,13 @@
 
     # cat /proc/2948/cmdline
     /usr/sbin/libvirtd--listen
+
+##cwd  
+`/proc/[pid]/cwd`是进程当前工作目录的符号链接。举例如下：  
+
+    # ls -lt /proc/2948/cwd
+    lrwxrwxrwx 1 root root 0 Nov  9 12:14 /proc/2948/cwd -> /
+
 
 ## environ  
 `/proc/[pid]/environ`显示进程的环境变量。举例如下：  
