@@ -7,6 +7,7 @@
 [/proc/[pid]/maps](#maps)  
 [/proc/[pid]/root](#root)  
 [/proc/[pid]/stack](#stack)  
+[/proc/[pid]/syscall](#syscall)  
 
 ## auxv
 `/proc/[pid]/auxv`包含传递给进程的`ELF`解释器信息，格式是每一项都是一个`unsigned long`长度的`ID`加上一个`unsigned long`长度的值。最后一项以连续的两个`0x00`开头。举例如下：  
@@ -101,9 +102,8 @@
     lrwxrwxrwx 1 root root 0 Nov  9 12:14 /proc/2948/root -> /
 
 ## stack
-`/proc/[pid]/stack`显示当前进程的内核调用栈信息，只有内核编译时打开了`CONFIG_STACKTRACE `编译选项，才会生成这个文件。举例如下：  
-
-    # cat task/94681/stack
+`/proc/[pid]/stack`显示当前进程的内核调用栈信息，只有内核编译时打开了`CONFIG_STACKTRACE`编译选项，才会生成这个文件。举例如下：  
+    # cat /proc/2948/stack
     [<ffffffff804636e5>] unix_stream_recvmsg+0x2d5/0x8c0
     [<ffffffff803b624e>] sock_aio_read.part.6+0xfe/0x120
     [<ffffffff80153fe6>] do_sync_read+0x86/0xd0
@@ -112,3 +112,13 @@
     [<ffffffff804c18ad>] tracesys+0xb3/0xb8
     [<00007f4a422cba9d>] 0x7f4a422cba9d
     [<ffffffffffffffff>] 0xffffffffffffffff
+
+## syscall
+`/proc/[pid]/syscall`显示当前进程正在执行的系统调用。举例如下：  
+
+    # cat /proc/2948/syscall
+    7 0x7f4a452cbe70 0xb 0x1388 0xffffffffffdff000 0x7f4a4274a750 0x0 0x7ffd1a8033f0 0x7f4a41ff2c1d
+    
+第一个值是系统调用号（`7`代表`poll`），后面跟着`6`个系统调用的参数值（位于寄存器中），最后两个值依次是堆栈指针和指令计数器的值。如果当前进程虽然阻塞，但阻塞函数并不是系统调用，则系统调用号的值为`-1`，后面只有堆栈指针和指令计数器的值。如果进程没有阻塞，则这个文件只有一个“`running`”的字符串。
+
+内核编译时打开了`CONFIG_HAVE_ARCH_TRACEHOOK`编译选项，才会生成这个文件。
