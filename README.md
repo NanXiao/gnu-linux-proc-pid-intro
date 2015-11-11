@@ -6,6 +6,7 @@
 [/proc/[pid]/exe](#exe)  
 [/proc/[pid]/maps](#maps)  
 [/proc/[pid]/root](#root)  
+[/proc/[pid]/stack](#stack)  
 
 ## auxv
 `/proc/[pid]/auxv`包含传递给进程的`ELF`解释器信息，格式是每一项都是一个`unsigned long`长度的`ID`加上一个`unsigned long`长度的值。最后一项以连续的两个`0x00`开头。举例如下：  
@@ -99,3 +100,15 @@
     # ls -lt /proc/2948/root
     lrwxrwxrwx 1 root root 0 Nov  9 12:14 /proc/2948/root -> /
 
+## stack
+`/proc/[pid]/stack`显示当前进程的内核调用栈信息，只有内核编译时打开了`CONFIG_STACKTRACE `编译选项，才会生成这个文件。举例如下：  
+
+    # cat task/94681/stack
+    [<ffffffff804636e5>] unix_stream_recvmsg+0x2d5/0x8c0
+    [<ffffffff803b624e>] sock_aio_read.part.6+0xfe/0x120
+    [<ffffffff80153fe6>] do_sync_read+0x86/0xd0
+    [<ffffffff801546dd>] vfs_read+0x13d/0x160
+    [<ffffffff80155138>] SyS_read+0x48/0xa0
+    [<ffffffff804c18ad>] tracesys+0xb3/0xb8
+    [<00007f4a422cba9d>] 0x7f4a422cba9d
+    [<ffffffffffffffff>] 0xffffffffffffffff
