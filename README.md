@@ -103,14 +103,13 @@
 
 ## stack
 `/proc/[pid]/stack`显示当前进程的内核调用栈信息，只有内核编译时打开了`CONFIG_STACKTRACE`编译选项，才会生成这个文件。举例如下：  
+
     # cat /proc/2948/stack
-    [<ffffffff804636e5>] unix_stream_recvmsg+0x2d5/0x8c0
-    [<ffffffff803b624e>] sock_aio_read.part.6+0xfe/0x120
-    [<ffffffff80153fe6>] do_sync_read+0x86/0xd0
-    [<ffffffff801546dd>] vfs_read+0x13d/0x160
-    [<ffffffff80155138>] SyS_read+0x48/0xa0
-    [<ffffffff804c18ad>] tracesys+0xb3/0xb8
-    [<00007f4a422cba9d>] 0x7f4a422cba9d
+    [<ffffffff80168375>] poll_schedule_timeout+0x45/0x60
+    [<ffffffff8016994d>] do_sys_poll+0x49d/0x550
+    [<ffffffff80169abd>] SyS_poll+0x5d/0xf0
+    [<ffffffff804c16e7>] system_call_fastpath+0x16/0x1b
+    [<00007f4a41ff2c1d>] 0x7f4a41ff2c1d
     [<ffffffffffffffff>] 0xffffffffffffffff
 
 ## syscall
