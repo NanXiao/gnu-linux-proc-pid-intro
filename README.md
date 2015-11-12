@@ -4,6 +4,7 @@
 [/proc/[pid]/cwd](#cwd)  
 [/proc/[pid]/environ](#environ)  
 [/proc/[pid]/exe](#exe)  
+[/proc/[pid]/limits](#limits)  
 [/proc/[pid]/maps](#maps)  
 [/proc/[pid]/root](#root)  
 [/proc/[pid]/stack](#stack)  
@@ -74,6 +75,29 @@
 
     # ls -lt /proc/2948/exe
     lrwxrwxrwx 1 root root 0 Nov  5 13:04 /proc/2948/exe -> /usr/sbin/libvirtd
+
+## limits
+`/proc/[pid]/limits`显示当前进程的资源限制。举例如下：  
+
+    # cat /proc/2948/limits
+    Limit                     Soft Limit           Hard Limit           Units
+    Max cpu time              unlimited            unlimited            seconds
+    Max file size             unlimited            unlimited            bytes
+    Max data size             unlimited            unlimited            bytes
+    Max stack size            8388608              unlimited            bytes
+    Max core file size        0                    unlimited            bytes
+    Max resident set          unlimited            unlimited            bytes
+    Max processes             6409                 6409                 processes
+    Max open files            1024                 4096                 files
+    Max locked memory         65536                65536                bytes
+    Max address space         unlimited            unlimited            bytes
+    Max file locks            unlimited            unlimited            locks
+    Max pending signals       6409                 6409                 signals
+    Max msgqueue size         819200               819200               bytes
+    Max nice priority         0                    0
+    Max realtime priority     0                    0
+    Max realtime timeout      unlimited            unlimited            us
+`Soft Limit`表示`kernel`设置给资源的值，`Hard Limit`表示`Soft Limit`的上限，而`Units`则为计量单元。
 
 ## maps
 `/proc/[pid]/maps`显示进程的内存区域映射信息。举例如下：  
