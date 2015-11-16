@@ -5,6 +5,7 @@
 [/proc/[pid]/environ](#environ)  
 [/proc/[pid]/exe](#exe)  
 [/proc/[pid]/limits](#limits)  
+[/proc/[pid]/latency](#latency)  
 [/proc/[pid]/maps](#maps)  
 [/proc/[pid]/root](#root)  
 [/proc/[pid]/stack](#stack)  
@@ -75,6 +76,15 @@
 
     # ls -lt /proc/2948/exe
     lrwxrwxrwx 1 root root 0 Nov  5 13:04 /proc/2948/exe -> /usr/sbin/libvirtd
+
+## latency  
+`/proc/[pid]/latency`显示哪些代码造成的延时比较大（使用这个`feature`，需要执行“`echo 1 > /proc/sys/kernel/latencytop`”）。举例如下：  
+
+    # cat /proc/2948/latency
+    Latency Top version : v0.1
+    30667 10650491 4891 poll_schedule_timeout do_sys_poll SyS_poll system_call_fastpath 0x7f636573dc1d
+    8 105 44 futex_wait_queue_me futex_wait do_futex SyS_futex system_call_fastpath 0x7f6365a167bc
+每一行前三个数字分别是后面代码执行的次数，总共执行延迟时间（单位是微秒）和最长执行延迟时间（单位是微秒），后面则是代码完整的调用栈。
 
 ## limits
 `/proc/[pid]/limits`显示当前进程的资源限制。举例如下：  
