@@ -4,12 +4,13 @@
 [/proc/[pid]/cwd](#cwd)  
 [/proc/[pid]/environ](#environ)  
 [/proc/[pid]/exe](#exe)  
-[/proc/[pid]/limits](#limits)  
 [/proc/[pid]/latency](#latency)  
+[/proc/[pid]/limits](#limits)  
 [/proc/[pid]/maps](#maps)  
 [/proc/[pid]/root](#root)  
 [/proc/[pid]/stack](#stack)  
 [/proc/[pid]/syscall](#syscall)  
+[/proc/[pid]/wchan](#wchan)  
 
 ## auxv
 `/proc/[pid]/auxv`包含传递给进程的`ELF`解释器信息，格式是每一项都是一个`unsigned long`长度的`ID`加上一个`unsigned long`长度的值。最后一项以连续的两个`0x00`开头。举例如下：  
