@@ -106,7 +106,7 @@
     lrwx------. 1 root root 64 Apr 18 16:51 8 -> socket:[37450]
     lrwx------. 1 root root 64 Apr 18 16:51 9 -> socket:[37451]
     l-wx------. 1 root root 64 Apr 13 16:35 2 -> /root/.vnc/localhost.localdomain:1.log
-目录中的每一项都是一个符号链接，指向打开的文件，数字则是文件描述符。  
+目录中的每一项都是一个符号链接，指向打开的文件，数字则代表文件描述符。  
 
 ## latency  
 `/proc/[pid]/latency`显示哪些代码造成的延时比较大（使用这个`feature`，需要执行“`echo 1 > /proc/sys/kernel/latencytop`”）。举例如下：  
