@@ -4,6 +4,7 @@
 [/proc/[pid]/cwd](#cwd)  
 [/proc/[pid]/environ](#environ)  
 [/proc/[pid]/exe](#exe)  
+[/proc/[pid]/fd](#fd)  
 [/proc/[pid]/latency](#latency)  
 [/proc/[pid]/limits](#limits)  
 [/proc/[pid]/maps](#maps)  
@@ -77,6 +78,35 @@
 
     # ls -lt /proc/2948/exe
     lrwxrwxrwx 1 root root 0 Nov  5 13:04 /proc/2948/exe -> /usr/sbin/libvirtd
+
+## fd
+`/proc/[pid]/fd`是一个目录，包含进程打开文件的情况。举例如下：  
+
+    # ls -lt /proc/3801/fd
+    total 0
+    lrwx------. 1 root root 64 Apr 18 16:51 0 -> socket:[37445]
+    lrwx------. 1 root root 64 Apr 18 16:51 1 -> socket:[37446]
+    lrwx------. 1 root root 64 Apr 18 16:51 10 -> socket:[31729]
+    lrwx------. 1 root root 64 Apr 18 16:51 11 -> socket:[34562]
+    lrwx------. 1 root root 64 Apr 18 16:51 12 -> socket:[39978]
+    lrwx------. 1 root root 64 Apr 18 16:51 13 -> socket:[34574]
+    lrwx------. 1 root root 64 Apr 18 16:51 14 -> socket:[39137]
+    lrwx------. 1 root root 64 Apr 18 16:51 15 -> socket:[39208]
+    lrwx------. 1 root root 64 Apr 18 16:51 16 -> socket:[39221]
+    lrwx------. 1 root root 64 Apr 18 16:51 17 -> socket:[41080]
+    lrwx------. 1 root root 64 Apr 18 16:51 18 -> socket:[40014]
+    lrwx------. 1 root root 64 Apr 18 16:51 19 -> socket:[34617]
+    lrwx------. 1 root root 64 Apr 18 16:51 20 -> socket:[34620]
+    lrwx------. 1 root root 64 Apr 18 16:51 23 -> socket:[42357]
+    lr-x------. 1 root root 64 Apr 18 16:51 3 -> /dev/urandom
+    lrwx------. 1 root root 64 Apr 18 16:51 4 -> socket:[37468]
+    lrwx------. 1 root root 64 Apr 18 16:51 5 -> socket:[37471]
+    lrwx------. 1 root root 64 Apr 18 16:51 6 -> socket:[289532]
+    lrwx------. 1 root root 64 Apr 18 16:51 7 -> socket:[31728]
+    lrwx------. 1 root root 64 Apr 18 16:51 8 -> socket:[37450]
+    lrwx------. 1 root root 64 Apr 18 16:51 9 -> socket:[37451]
+    l-wx------. 1 root root 64 Apr 13 16:35 2 -> /root/.vnc/localhost.localdomain:1.log
+目录中的每一项都是一个符号链接，指向打开的文件，数字则是文件描述符。  
 
 ## latency  
 `/proc/[pid]/latency`显示哪些代码造成的延时比较大（使用这个`feature`，需要执行“`echo 1 > /proc/sys/kernel/latencytop`”）。举例如下：  
