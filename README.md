@@ -10,6 +10,7 @@
 [/proc/[pid]/maps](#maps)  
 [/proc/[pid]/root](#root)  
 [/proc/[pid]/stack](#stack)  
+[/proc/[pid]/statm](#statm)  
 [/proc/[pid]/syscall](#syscall)  
 [/proc/[pid]/wchan](#wchan)  
 
@@ -177,6 +178,21 @@
     [<00007f4a41ff2c1d>] 0x7f4a41ff2c1d
     [<ffffffffffffffff>] 0xffffffffffffffff
 
+## statm
+`/proc/[pid]/statm`显示进程所占用内存大小的统计信息，包含七个值，度量单位是`page`（`page`大小可通过`getconf PAGESIZE`得到）。举例如下：  
+
+    # cat /proc/2948/statm  
+    72362 12945 4876 569 0 24665 0
+
+各个值含义：   
+    a）进程占用的总的内存；  
+    b）进程当前时刻占用的物理内存；   
+    c）同其它进程共享的内存；  
+    d）进程的代码段；  
+    e）共享库（从`2.6`版本起，这个值为`0`）；  
+    f）进程的堆栈；  
+    g）`dirty pages`（从`2.6`版本起，这个值为`0`）。  
+    
 ## syscall
 `/proc/[pid]/syscall`显示当前进程正在执行的系统调用。举例如下：  
 
