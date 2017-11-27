@@ -11,6 +11,7 @@
 [/proc/[pid]/root](#root)  
 [/proc/[pid]/stack](#stack)  
 [/proc/[pid]/statm](#statm)  
+[/proc/[pid]/status](#status)  
 [/proc/[pid]/syscall](#syscall)  
 [/proc/[pid]/wchan](#wchan)  
 
@@ -192,7 +193,66 @@
     e）共享库（从`2.6`版本起，这个值为`0`）；  
     f）进程的堆栈；  
     g）`dirty pages`（从`2.6`版本起，这个值为`0`）。  
-    
+
+## status
+`/proc/[pid]/status`包含进程的状态信息。其很多内容与`/proc/[pid]/stat`和`/proc/[pid]/statm`，但是却是以一种更清晰地方式展现出来。举例如下：  
+
+	# cat /proc/$$/status
+	Name:   bash
+	Umask:  0022
+	State:  S (sleeping)
+	Tgid:   15694
+	Ngid:   0
+	Pid:    15694
+	PPid:   15692
+	TracerPid:      0
+	Uid:    0       0       0       0
+	Gid:    0       0       0       0
+	FDSize: 256
+	Groups: 0 1 2 3 4 6 10 19
+	NStgid: 15694
+	NSpid:  15694
+	NSpgid: 15694
+	NSsid:  15694
+	VmPeak:    26040 kB
+	VmSize:    26040 kB
+	VmLck:         0 kB
+	VmPin:         0 kB
+	VmHWM:      5412 kB
+	VmRSS:      5412 kB
+	RssAnon:            2272 kB
+	RssFile:            3140 kB
+	RssShmem:              0 kB
+	VmData:     2244 kB
+	VmStk:       132 kB
+	VmExe:       792 kB
+	VmLib:      2732 kB
+	VmPTE:        68 kB
+	VmPMD:        12 kB
+	VmSwap:        0 kB
+	HugetlbPages:          0 kB
+	Threads:        1
+	SigQ:   0/11753
+	SigPnd: 0000000000000000
+	ShdPnd: 0000000000000000
+	SigBlk: 0000000000010000
+	SigIgn: 0000000000380004
+	SigCgt: 000000004b817efb
+	CapInh: 0000000000000000
+	CapPrm: 0000003fffffffff
+	CapEff: 0000003fffffffff
+	CapBnd: 0000003fffffffff
+	CapAmb: 0000000000000000
+	NoNewPrivs:     0
+	Seccomp:        0
+	Cpus_allowed:   f
+	Cpus_allowed_list:      0-3
+	Mems_allowed:   00000000,00000001
+	Mems_allowed_list:      0
+	voluntary_ctxt_switches:        1045
+	nonvoluntary_ctxt_switches:     30
+
+关于信号（`signal`）的信息：`SigQ`分为两部分（例如`0/11753`），前面表示当前处在队列中的信号（`0`），后面则表示队列一共可以存储多少信号（`11753`）；`SigPnd`表示当前线程`pending`的信号，而`ShdPnd`则表示整个进程`pending`的信号；`SigBlk`、`SigIgn`和`SigCgt`分别表示对信号的处理是阻塞，忽略，还是捕获。（关于`Unix`信号的相关知识，可以参考[Unix: Dealing with signals](https://www.networkworld.com/article/3211296/linux/unix-dealing-with-signals.html)）。
 ## syscall
 `/proc/[pid]/syscall`显示当前进程正在执行的系统调用。举例如下：  
 
