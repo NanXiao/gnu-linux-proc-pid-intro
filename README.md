@@ -56,7 +56,7 @@
     # cat /proc/2948/comm
     libvirtd
 
-##cwd  
+## cwd  
 `/proc/[pid]/cwd`是进程当前工作目录的符号链接。举例如下：  
 
     # ls -lt /proc/2948/cwd
